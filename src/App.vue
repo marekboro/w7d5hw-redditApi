@@ -1,28 +1,46 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h3>This is a test of the VUE</h3>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "app",
+  data() {
+    return {
+      pagesToFetch: 1,
+      everythingFetched: [],
+      stuffFromAPI: [],
+      after: null, // this will need to update once the fist fetch is called.
+    };
+  },
+  mounted() {
+    this.fetchData();
+    this.everythingFetched.concat(this.stuffFromAPI);
+  },
+  methods: {
+    fetchData() {
+      fetch("https://www.reddit.com/r/javascript.json")
+        .then((promise) => promise.json())
+        .then((data) => (this.stuffFromAPI = data.data.children));
+    },
+    fetchMultiplePages(){
+      for (i=0;i<this.pagesToFetch;i++){
+        console.log
+      }
+    },
+    mergeFetchOntoDatabase() {
+      this.everythingFetched = this.everythingFetched.concat(this.stuffFromAPI);
+    },
+  },
+  watch: {
+    stuffFromAPI: function () {
+      this.mergeFetchOntoDatabase();
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

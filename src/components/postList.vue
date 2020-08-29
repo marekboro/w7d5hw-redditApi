@@ -29,6 +29,9 @@ h3{
     padding: 0%;
     margin: 0%;
 }
+ul{
+    list-style: none;
+}
 /* div{
     background-color: cyan;
 }

@@ -5,6 +5,7 @@
         <postList :posts="fetchedPosts" />
       </div>
       <div id="favourites">
+        
         <favPosts :posts="favourites" />
       </div>
     </section>
@@ -13,8 +14,8 @@
         <h3>Here will be the filters</h3>
       </div>
       <div id="postDetails">
-        <postDetails v-if="selectedPost" :postDetails="selectedPost" />
         <button v-on:click="addToFavourites"> + (fav's)</button>
+        <postDetails v-if="selectedPost" :postDetails="selectedPost" />
       </div>
     </section>
   </div>
@@ -41,6 +42,7 @@ export default {
   mounted() {
     this.fetchData(this.pagesToFetch);
     eventBus.$on("clicked-post", (post) => (this.selectedPost = post));
+    eventBus.$on('post-to-delete-from-favs', (post) => this.removeFromFavs(post));
   },
   methods: {
     fetchData: function (pagesCount) {
@@ -55,10 +57,12 @@ export default {
       }
     },
     addToFavourites: function(){
-      
       this.selectedPost ? this.favourites.push(this.selectedPost):console.log("cannot add")
-    
     },
+    removeFromFavs: function(object) {
+      this.favourites = this.favourites.filter((apost) => apost != object)
+    }
+    
   },
   components: {
     postList,

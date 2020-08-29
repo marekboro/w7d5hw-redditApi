@@ -57,7 +57,14 @@ export default {
       }
     },
     addToFavourites: function(){
-      this.selectedPost ? this.favourites.push(this.selectedPost):console.log("cannot add")
+      this.selectedPost ? this.favourites.indexOf(this.selectedPost) <0 ? this.favourites.push(this.selectedPost):console.log("item already in favourites") :console.log("nothing to add")
+      
+      // this.favourites.push(this.selectedPost):console.log("cannot add")
+      
+      
+
+
+      // this.selectedPost ? this.favourites.push(this.selectedPost):console.log("cannot add") //works
     },
     removeFromFavs: function(object) {
       this.favourites = this.favourites.filter((apost) => apost != object)

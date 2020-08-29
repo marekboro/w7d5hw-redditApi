@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h3>Posts:</h3>
+      <h3>Posts loaded: {{posts.length}}</h3>
       <ul class="postViewer">
           <li>
               <singlePost v-for="(post,index) in posts" :key="index" :post="post" />

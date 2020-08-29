@@ -5,7 +5,7 @@
         <postList :posts="fetchedPosts" />
       </div>
       <div id="favourites">
-        <h3>Here will be favourites</h3>
+        <favPosts :posts="favourites" />
       </div>
     </section>
     <section id="filterAndPostDetails">
@@ -14,6 +14,7 @@
       </div>
       <div id="postDetails">
         <postDetails v-if="selectedPost" :postDetails="selectedPost" />
+        <button v-on:click="addToFavourites"> + (fav's)</button>
       </div>
     </section>
   </div>
@@ -21,6 +22,7 @@
 
 <script>
 import postList from "@/components/postList";
+import favPosts from "@/components/favouritePosts";
 import postDetails from "@/components/postDetails";
 import { eventBus } from "@/main.js";
 
@@ -30,6 +32,7 @@ export default {
     return {
       pagesToFetch: 2,
       fetchedPosts: [],
+      favourites:[],
       selectedPost: null,
       urlStart: "https://old.reddit.com/r/javascript.json?count=25&",
       urlEnd: "before=%22null%22",
@@ -51,10 +54,16 @@ export default {
           });
       }
     },
+    addToFavourites: function(){
+      
+      this.selectedPost ? this.favourites.push(this.selectedPost):console.log("cannot add")
+    
+    },
   },
   components: {
     postList,
     postDetails,
+    favPosts
   },
   watch: {
     fetchedPosts: function () {
@@ -96,7 +105,10 @@ export default {
   border: rgb(187, 187, 111) solid;
 }
 
-
+#postDetails{
+  display: flex;
+  flex-direction: row;
+}
 
 
 /* #list {

@@ -1,12 +1,21 @@
 <template>
   <div>
     <h3>This is a test of the VUE</h3>
+    <section>
     <postList :posts="fetchedPosts"/>
+    </section>
+    <section>
+      <postDetails v-if="selectedPost" :postDetails="selectedPost"/>
+    </section>
+
   </div>
 </template>
 
 <script>
 import postList from '@/components/postList'
+// import postView from '@/components/post'
+import postDetails from '@/components/postDetails'
+import {eventBus} from '@/main.js';
 
 export default {
   name: "app",
@@ -15,12 +24,15 @@ export default {
 
       pagesToFetch: 2,
       fetchedPosts: [],
+      selectedPost: null,
       urlStart: "https://old.reddit.com/r/javascript.json?count=25&",
       urlEnd: "before=%22null%22"
+      
     };
   },
   mounted() {
     this.fetchData(this.pagesToFetch);
+    eventBus.$on('clicked-post', post => this.selectedPost = post)
    
   },
   methods: {
@@ -38,7 +50,8 @@ export default {
     
   },
   components:{
-    postList
+    postList,
+    postDetails
   },
   watch: {
     fetchedPosts: function () {

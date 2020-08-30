@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Favourites</h3>
+    <h3>Favourites: {{posts.length}}</h3>
     <li>
     
     <singlePost v-for="(post,index) in posts" :key="index" :post="post" />

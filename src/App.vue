@@ -1,5 +1,7 @@
 <template>
-  <div id="fullPage">
+  <div >
+    <h2>Reddit Media viewer</h2>
+    <div id="fullPage">
     <section id="postsAndFavourites">
       <div id="postList">
         <postList :posts="fetchedPosts" />
@@ -18,6 +20,7 @@
         <postDetails v-if="selectedPost" :postDetails="selectedPost" />
       </div>
     </section>
+    </div>
   </div>
 </template>
 

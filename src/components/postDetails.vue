@@ -49,16 +49,7 @@ export default {
           this.postcontent = data[0].data.children[0].data.title;
           this.postHint = data[0].data.children[0].data.post_hint;
           
-          
-          //https://i.imgur.com/P9QWwtV.jpg"
-        //   this.postHint === "image" || "link"
-        //     ? (this.imageLink =
-        //         data[0].data.children[0].data.url_overridden_by_dest)
-        //     : this.postHint === "hosted:video"
-        //     ? (this.videoLink =
-        //         data[0].data.children[0].data.media.reddit_video.fallback_url)
-        //     : console.log("neither image nor video");
-          this.postHint === "image" // || "link"
+          this.postHint === "image" 
             ? (this.imageLink =
                 data[0].data.children[0].data.url_overridden_by_dest)
             : this.postHint === "link" 
